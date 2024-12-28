@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ informasi.judul }}</title>
+    <!-- Link ke Bootstrap (untuk styling) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">{{ informasi.judul }}</h1>
+        <p class="text-center">{{ informasi.deskripsi }}</p>
+        <p class="text-center">Kontak: <a href="mailto:{{ informasi.kontak }}">{{ informasi.kontak }}</a></p>
+
+        <!-- Formulir Simulasi -->
+        <h3>Simulasi Penyebaran HIV/AIDS</h3>
+        <form method="POST" action="/" id="simulasiForm">
+            <div class="form-group">
+                <label for="kasus_awal">Kasus Awal (misalnya jumlah kasus pada tahun 0)</label>
+                <input type="number" id="kasus_awal" name="kasus_awal" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="pertumbuhan_min">Pertumbuhan Min (%)</label>
+                <input type="number" step="0.01" id="pertumbuhan_min" name="pertumbuhan_min" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="pertumbuhan_max">Pertumbuhan Max (%)</label>
+                <input type="number" step="0.01" id="pertumbuhan_max" name="pertumbuhan_max" class="form-control" required>
+            </div>
+            
+            <!-- Tempat untuk menampilkan pesan error -->
+            <div id="error-message" class="text-danger"></div>
+
+            <button type="submit" class="btn btn-primary">Simulasikan</button>
+        </form>
+
+        <!-- Tabel hasil simulasi -->
+        <h3 class="mt-4">Hasil Simulasi</h3>
+        <div id="tabel-hasil">
+            {{ tabel | safe }}
+        </div>
+
+        <!-- Grafik Hasil Simulasi -->
+        <h3 class="mt-4">Grafik Prediksi Penyebaran HIV/AIDS</h3>
+        <img src="data:image/png;base64,{{ img_data }}" class="img-fluid" alt="Grafik Prediksi Penyebaran HIV/AIDS">
+    </div>
+
+    <!-- Script untuk validasi input di frontend -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <!-- Link ke Bootstrap JS (untuk interaktivitas seperti modal, dropdown, dsb) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
